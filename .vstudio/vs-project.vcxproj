@@ -78,7 +78,7 @@
     <TargetName>run</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='rel|x64'">
-    <OutDir>../bin/$(Configuration)-win-msbuild\</OutDir>
+    <OutDir>../bin/$(Configuration)-win-msbuild/</OutDir>
     <TargetName>run</TargetName>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
   </PropertyGroup>
@@ -87,7 +87,7 @@
     <TargetName>run</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='rel|Win32'">
-    <OutDir>../bin/$(Configuration)-win-msbuild\</OutDir>
+    <OutDir>../bin/$(Configuration)-win-msbuild/</OutDir>
     <TargetName>run</TargetName>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
   </PropertyGroup>
