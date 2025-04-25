@@ -32,7 +32,7 @@ if [ ! -f "tmp/rel-linux/AppImageBuilder.yml" ]; then
     cd ../..
 fi
 
-# Out/
+# Root folder
 echo "[SCRIPT]: Copying root folder"
 cp -r root/. bin/rel-linux/AppDir/
 
