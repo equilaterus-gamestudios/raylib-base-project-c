@@ -11,29 +11,28 @@
 char *get_root_dir()
 {
   // Override ROOT_DIR when running as an AppImage
+  #ifdef __linux__
   char *app_dir = getenv(ENV_APP_DIR);
   if (app_dir != NULL)
     return app_dir;
+  #endif
 
   return getenv(ENV_ROOT_DIR);
 }
 
+// Path limits
 #ifdef __linux__
 #include <linux/limits.h>
 char fixed_path[PATH_MAX];
+#else
+char fixed_path[255];
+#endif
+
 char *from_root_dir(char *path)
 {
   sprintf(fixed_path, "%s/%s", get_root_dir(), path);
-  return fixed_path;
-}
-#else
-char fixed_path[255];
-char *from_root(char *path)
-{
-  char *ROOT_DIR = getenv("ROOT_DIR");  
   return path;
 }
-#endif
 
 
 int main() {
