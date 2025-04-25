@@ -31,7 +31,7 @@ char fixed_path[255];
 char *from_root_dir(char *path)
 {
   sprintf(fixed_path, "%s/%s", get_root_dir(), path);
-  return path;
+  return fixed_path;
 }
 
 
