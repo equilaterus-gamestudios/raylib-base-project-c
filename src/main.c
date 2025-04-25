@@ -1,3 +1,7 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "raylib.h"
 
 #define RAYGUI_IMPLEMENTATION
@@ -30,7 +34,11 @@ char fixed_path[255];
 
 char *from_root_dir(char *path)
 {
-  sprintf(fixed_path, "%s/%s", get_root_dir(), path);
+  char *root_dir = get_root_dir();
+  if (root_dir == NULL) {
+    return path;
+  }
+  sprintf(fixed_path, "%s/%s", root_dir, path);
   return fixed_path;
 }
 
