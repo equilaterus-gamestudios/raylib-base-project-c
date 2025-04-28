@@ -3,8 +3,13 @@
 A cross-platform base project for raylib including debugging and syntax highlighting out-of-the-box.
 
 * Linux.
+    * Dev.
+    * AppImage packaging.
 * Windows.
+    * Dev.
+    * Release packaging.
 * Mac.
+    * Dev.
 
 * VScode/VSCodium support:
     * Debug
