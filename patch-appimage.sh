@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # Patch image adding libc
-YAML_FILE="tmp/rel-linux/AppImageBuilder.yml"
-# Check if the YAML file exists
+# Check if YAML file path is provided as an argument
+if [ -z "$1" ]; then
+    echo "Error: No YAML file path provided"
+    echo "Usage: $0 <path-to-appimage-builder.yml>"
+    exit 1
+fi
+
+YAML_FILE="$1"
 if [ ! -f "$YAML_FILE" ]; then
     echo "Error: $YAML_FILE not found"
     exit 1

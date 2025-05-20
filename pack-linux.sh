@@ -35,7 +35,7 @@ if [ ! -f "tmp/rel-linux/AppImageBuilder.yml" ]; then
     cp AppImageBuilder.yml ../../tmp/rel-linux/
     cd ../..
 fi
-sh patch-appimage.sh
+sh patch-appimage.sh "tmp/rel-linux/AppImageBuilder.yml"
 cp tmp/rel-linux/AppImageBuilder.yml bin/rel-linux/AppImageBuilder.yml
 
 # Root folder
@@ -43,7 +43,6 @@ echo "[SCRIPT]: Copying root folder"
 cp -r root/. bin/rel-linux/AppDir/
 
 # Build AppImage
-export LD_LIBRARY_PATH=/lib64:/usr/lib64:$LD_LIBRARY_PATH
 read -p "[SCRIPT]: Press enter to Build the AppImage"
 echo "[SCRIPT]: Building AppImage"
 cd bin/rel-linux
