@@ -8,12 +8,16 @@ fi
 
 # Compile
 echo "[SCRIPT]: Compiling release binaries"
+mkdir -p root/
 mkdir -p bin/rel-linux/AppDir/lib
+mkdir -p tmp/rel-linux/
 gcc src/main.c -O3 -Wall -lraylib -lm -o bin/rel-linux/AppDir/run -std=c99 -pedantic
 
 # Copy missing raylib shared libraries
 cp /usr/local/lib64/libraylib.so.5.5.0 bin/rel-linux/AppDir/lib/
 mv bin/rel-linux/AppDir/lib/libraylib.so.5.5.0 bin/rel-linux/AppDir/lib/libraylib.so.550
+cp /lib64/libc.so.6 bin/rel-linux/AppDir/lib/
+mv bin/rel-linux/AppDir/lib/libc.so.6 bin/rel-linux/AppDir/lib/libc.so
 
 # AppImage recipe
 if [ ! -f "tmp/rel-linux/AppImageBuilder.yml" ]; then
@@ -27,17 +31,21 @@ if [ ! -f "tmp/rel-linux/AppImageBuilder.yml" ]; then
 
     echo "[SCRIPT]: Running appimage-builder. For the executable path be sure to write the following filename -> run"
     appimage-builder --generate
-    cp AppImageBuilder.yml ../../tmp/rel-linux/
 
+    cp AppImageBuilder.yml ../../tmp/rel-linux/
     cd ../..
 fi
+sh patch-appimage.sh
+cp tmp/rel-linux/AppImageBuilder.yml bin/rel-linux/AppImageBuilder.yml
 
 # Root folder
 echo "[SCRIPT]: Copying root folder"
 cp -r root/. bin/rel-linux/AppDir/
 
 # Build AppImage
-echo "[SCRIPT]: Builing AppImage"
+export LD_LIBRARY_PATH=/lib64:/usr/lib64:$LD_LIBRARY_PATH
+read -p "[SCRIPT]: Press enter to Build the AppImage"
+echo "[SCRIPT]: Building AppImage"
 cd bin/rel-linux
 appimage-builder --recipe AppImageBuilder.yml
 cd ../..
